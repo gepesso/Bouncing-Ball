@@ -1,0 +1,44 @@
+# Shoot Ball up and come down
+
+import turtle
+import math
+
+wn = turtle.Screen()
+wn.bgcolor("black")
+wn.setup(width=600, height=800)
+wn.tracer(0)
+
+# Ball
+ball = turtle.Turtle()
+ball.color("white")
+ball.shape("circle")
+ball.shapesize(stretch_len=1,stretch_wid=1)
+ball.penup()
+ball.speed(0)
+ball.goto(0,300)
+ball.dy = 0
+
+gravity = 0.0001
+
+varVar = True
+
+# function to quit
+def quitscreen():
+    global varVar
+    varVar = False
+
+wn.listen()
+wn.onkeypress(quitscreen, "q")
+
+while varVar:
+    wn.update()
+
+    # ball goes up
+    ball.dy -= gravity
+    ball.sety(ball.ycor() + ball.dy)
+
+    #check to bounce
+    if ball.ycor() < -300:
+        ball.dy *= -1
+
+turtle.mainloop()
